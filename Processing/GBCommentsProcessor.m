@@ -480,7 +480,8 @@ typedef NSUInteger GBProcessingFlag;
 	if ([components count] == 0) return NO;
 	
 	// Get data from captures. Index 1 is directive, index 2 description text.
-	NSString *description = components[3];
+    // Replace "\n" with " " to make abstract one line.
+    NSString *description = [components[3] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
 	NSRange index;
 	index = [description rangeOfString:@"@discussion"];
 	
