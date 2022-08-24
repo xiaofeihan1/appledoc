@@ -20,6 +20,9 @@
 @interface GBMethodData ()
 
 - (NSString *)selectorFromAssignedData;
+
+- (NSString *)selectorFromAssignedDataCustom;
+
 - (NSString *)prefixedSelectorFromAssignedData;
 - (NSString *)selectorDelimiterFromAssignedData;
 - (NSString *)prefixFromAssignedData;
@@ -121,6 +124,8 @@
 		_methodPrefix = [self prefixFromAssignedData];
 		_methodSelectorDelimiter = [self selectorDelimiterFromAssignedData];
 		_methodSelector = [self selectorFromAssignedData];
+        // Add the following is to ref class file, such as "/createCookie_withName_withError"
+        _methodSelectorFilename = [self selectorFromAssignedDataCustom];
         _methodReturnType = (NSString *)self.methodResultTypes.firstObject;
 		_prefixedMethodSelector = [self prefixedSelectorFromAssignedData];
 	}
@@ -276,6 +281,15 @@
 		[result appendString:self.methodSelectorDelimiter];
 	}
 	return result;
+}
+
+- (NSString *)selectorFromAssignedDataCustom {
+    NSMutableString *result = [NSMutableString string];
+    for (GBMethodArgument *argument in self.methodArguments) {
+        [result appendString:argument.argumentName];
+        [result appendString:@"_"];
+    }
+    return result;
 }
 
 - (NSString *)prefixedSelectorFromAssignedData {
@@ -447,6 +461,7 @@
 @synthesize methodResultTypes = _methodResultTypes;
 @synthesize methodArguments = _methodArguments;
 @synthesize methodSelector = _methodSelector;
+@synthesize methodSelectorFilename = _methodSelectorFilename;
 @synthesize methodReturnType = _methodReturnType;
 @synthesize methodSelectorDelimiter = _methodSelectorDelimiter;
 @synthesize methodPrefix = _methodPrefix;

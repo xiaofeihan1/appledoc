@@ -39,6 +39,7 @@ typedef NSUInteger GBMethodType;
 	NSArray *_methodResultTypes;
 	NSArray *_methodArguments;
 	NSString *_methodSelector;
+  NSString *_methodSelectorFilename;
 	NSString *_prefixedMethodSelector;
 	NSString *_methodSelectorDelimiter;
 	NSString *_methodPrefix;
@@ -106,6 +107,11 @@ typedef NSUInteger GBMethodType;
  @see prefixedMethodSelector
  */
 @property (readonly) NSString *methodSelector;
+
+/**
+    MSDN do NOT support ":" in filename, so use "_".
+ */
+@property (readonly) NSString *methodSelectorFilename;
 
 /** Method return type that can be used for shared property/method names. */
 @property (readonly) NSString *methodReturnType;
