@@ -438,7 +438,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GBApplicationSettingsProvider, sharedApplicationS
             case GBHTMLAnchorFormatApple:
                 return [NSString stringWithFormat:@"%@//apple_ref/occ/%@/%@/%@", prefix, [method methodTypeString], [method parentObject], method.methodSelector];
             case GBHTMLAnchorFormatAppleDoc:
-                return [NSString stringWithFormat:@"%@//api/name/%@", prefix, method.methodSelector];
+              if(method.methodType == GBMethodTypeProperty) {
+                return [NSString stringWithFormat:@"../Properties/%@", method.methodSelector];
+              }
+              else if(method.methodType == GBMethodTypeInstance) {
+                return [NSString stringWithFormat:@"../Instance Methods/%@", method.methodSelectorFilename];
+              }
+              else {
+                return [NSString stringWithFormat:@"../Class Methods/%@", method.methodSelectorFilename];
+              }
         }
 	}
 	return @"";
