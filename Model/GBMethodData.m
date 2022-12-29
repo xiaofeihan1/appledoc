@@ -200,6 +200,8 @@
 			}
 			if (idx < [self.methodArguments count]-1) [result addObject:[self formattedComponentWithValue:@" "]];
 		}];
+    // Add suffix
+    [result addObject:[self formattedComponentWithValue:@";"]];
 	}
 	return result;
 }
@@ -212,14 +214,21 @@
 	__block BOOL insideProtocol = NO;
 	__block BOOL appendSpace = NO;
 	[types enumerateObjectsUsingBlock:^(NSString *type, NSUInteger idx, BOOL *stop) {
+        // We don't show the `nullable` keyword
+        if ([type isEqualToString:@"_Nullable"] || [type isEqualToString:@"nullable"]) return;
 		if (appendSpace) [array addObject:[self formattedComponentWithValue:@" "]];
 		[array addObject:[self formattedComponentWithValue:type]];
 		
 		// We should not add space after last element or after pointer.
+        // We also should not add space after `(`,`)`
 		appendSpace = YES;
 		BOOL isLast = (idx == [types count] - 1);
 		BOOL isPointer = [type isEqualToString:@"*"];
-		if (isLast || isPointer) appendSpace = NO;
+        BOOL isSpecialSymbol = [type isEqualToString:@"("] || [type isEqualToString:@")"];
+		if (isLast || isPointer || isSpecialSymbol) appendSpace = NO;
+        // We should not add space before `)` or `,`
+        // Such as `newWebView` "void (^)(BOOL handled, MSWebView2WebView *newWebView)"
+        if(idx+1< [types count] && ([types[idx + 1] isEqualToString:@")"]||[types[idx + 1] isEqualToString:@","])) appendSpace = NO;
 		
 		// We should not add space between components of a protocol (i.e. id<ProtocolName> should be written without any space). Because we've alreay
 		if (!isLast && idx+1 < [types count] && [types[idx + 1] isEqualToString:@"<"])

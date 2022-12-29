@@ -325,7 +325,8 @@
 	NSString *tabPrefixRegex = @"^\t";
 	NSMutableString *result = [NSMutableString stringWithCapacity:[value length]];
 	[preprocessedLines enumerateObjectsUsingBlock:^(NSString *line, NSUInteger idx, BOOL *stop) {
-		if (stripPrefix) line = [line stringByReplacingOccurrencesOfRegex:prefixRegex withString:@""];
+        NSString *customPrefixRegex = @"(?m:^\\s*\\*\\s?)"; // "  * abc" =>"abc"
+		if (stripPrefix) line = [line stringByReplacingOccurrencesOfRegex:customPrefixRegex withString:@""];
 		if (![line isMatchedByRegex:spacesPrefixRegex] && ![line isMatchedByRegex:tabPrefixRegex]) line = [line stringByTrimmingCharactersInSet:spacesSet];
         line = [self lineByPreprocessingHeaderDocDirectives:line];
 		[result appendString:line];
