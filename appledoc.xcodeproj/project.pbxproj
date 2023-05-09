@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -928,7 +928,6 @@
 				B4D1FFE715FF60B7009736E2 /* ShellScript */,
 				8DD76F990486AA7600D96B5E /* Sources */,
 				8DD76F9B0486AA7600D96B5E /* Frameworks */,
-				B4D1FFF515FF637A009736E2 /* ShellScript */,
 				3037AFD851D1C60D4B664697 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -1066,7 +1065,8 @@
 		};
 		B4D1FFE715FF60B7009736E2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1075,20 +1075,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\ncd Templates\nzip -r default_templates.zip .\nmv default_templates.zip \"$PROJECT_DIR\"\ncd ..";
-		};
-		B4D1FFF515FF637A009736E2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "rm default_templates.zip";
+			shellScript = "#!/bin/bash\n\ncd Templates\nzip -r default_templates.zip .\nmv default_templates.zip \"$PROJECT_DIR\"\ncd ..\n";
 		};
 		DF3115CCC2D4D3C32EE5F33D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1318,7 +1305,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-sectcreate",
@@ -1350,7 +1337,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-sectcreate",
@@ -1477,7 +1464,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -1516,7 +1503,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
