@@ -1120,8 +1120,9 @@ static struct smarties {
     { '\'', "'ve|",     "rsquo",  0 },
     { '\'', "'m|",      "rsquo",  0 },
     { '\'', "'d|",      "rsquo",  0 },
-    { '-',  "---",      "mdash",  2 },
-    { '-',  "--",       "ndash",  1 },
+    // xiaofeihan: Fix table markdown |---|---| render failed.
+    // { '-',  "---",      "mdash",  2 },
+    // { '-',  "--",       "ndash",  1 },
     { '.',  "...",      "hellip", 2 },
     { '.',  ". . .",    "hellip", 4 },
     { '(',  "(c)",      "copy",   2 },

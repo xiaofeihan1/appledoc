@@ -1207,7 +1207,9 @@ static NSString * escapePercentCharacters(NSString *string) {
 	
 	// Get link components. Index 0 contains full text, index 1 description without brackets, index 2 the address, index 3 optional title.
 	NSString *linkText = components[0];
-	NSString *description = components[1];
+  // xiaofeihan: If the `description` includes `\n`, the render content have bug.
+  // E.g. [AAAA\nBBBB](https://....) render !~@[AAAA\nBBBB](https://....)@~!
+	NSString *description = [components[1] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
 	NSString *address = components[2];
 	NSString *title = components[3];
 	if ([title length] > 0) title = escapePercentCharacters([NSString stringWithFormat:@" \"%@\"", title]);
